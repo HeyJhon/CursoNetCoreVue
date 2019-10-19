@@ -48,22 +48,12 @@
       <v-slide-y-transition mode="out-in">
           <router-view/>
       </v-slide-y-transition>
-
       </v-container>
     </v-content>
-
-
-
-
   <v-footer>
     <v-spacer></v-spacer>
-    <div>Jhonnatan&copy;2019 </div>
+    <div>Jhonnatan Flores&copy;2019 </div>
   </v-footer>
-
-     
-    
-  
-
   </v-app>
 </template>
 
