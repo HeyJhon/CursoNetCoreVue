@@ -24,19 +24,19 @@
               <v-list-item>
                 <v-list-item-content>
                   <v-list-item-title>
-                    Categorías
+                    Almacen
                   </v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
             </template>
 
-            <v-list-item>
+            <v-list-item :to="{name:'categorias'}">
                 <v-list-item-action>
                   <v-icon>table_chart</v-icon>
                 </v-list-item-action>
                 <v-list-item-content>
                     <v-list-item-title>
-                        Menu 1
+                        Categorias
                     </v-list-item-title>
                 </v-list-item-content>
             </v-list-item>
@@ -47,7 +47,7 @@
                 </v-list-item-action>
                 <v-list-item-content>
                     <v-list-item-title>
-                        Menu 2
+                        Articulos
                     </v-list-item-title>
                 </v-list-item-content>
             </v-list-item>
@@ -61,7 +61,7 @@
               <v-list-item>
                 <v-list-item-content>
                   <v-list-item-title>
-                    Categorías
+                    Compras
                   </v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
@@ -73,7 +73,7 @@
                 </v-list-item-action>
                 <v-list-item-content>
                     <v-list-item-title>
-                        Menu 1
+                        Ingresos
                     </v-list-item-title>
                 </v-list-item-content>
             </v-list-item>
@@ -84,44 +84,7 @@
                 </v-list-item-action>
                 <v-list-item-content>
                     <v-list-item-title>
-                        Menu 2
-                    </v-list-item-title>
-                </v-list-item-content>
-            </v-list-item>
-          </v-list-group>
-          </template> 
-
-          
-        <template>
-          <v-list-group>
-            <template v-slot:activator>
-              <v-list-item>
-                <v-list-item-content>
-                  <v-list-item-title>
-                    Categorías
-                  </v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </template>
-
-            <v-list-item>
-                <v-list-item-action>
-                  <v-icon>table_chart</v-icon>
-                </v-list-item-action>
-                <v-list-item-content>
-                    <v-list-item-title>
-                        Menu 1
-                    </v-list-item-title>
-                </v-list-item-content>
-            </v-list-item>
-
-             <v-list-item>
-                <v-list-item-action>
-                  <v-icon>table_chart</v-icon>
-                </v-list-item-action>
-                <v-list-item-content>
-                    <v-list-item-title>
-                        Menu 2
+                        Proveedores
                     </v-list-item-title>
                 </v-list-item-content>
             </v-list-item>
@@ -135,7 +98,7 @@
               <v-list-item>
                 <v-list-item-content>
                   <v-list-item-title>
-                    Categorías
+                    Ventas
                   </v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
@@ -147,7 +110,7 @@
                 </v-list-item-action>
                 <v-list-item-content>
                     <v-list-item-title>
-                        Menu 1
+                        Ventas
                     </v-list-item-title>
                 </v-list-item-content>
             </v-list-item>
@@ -158,13 +121,86 @@
                 </v-list-item-action>
                 <v-list-item-content>
                     <v-list-item-title>
-                        Menu 21
+                        Clientes
+                    </v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
+          </v-list-group>
+          </template> 
+
+          
+        <template>
+          <v-list-group>
+            <template v-slot:activator>
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title>
+                    Accesos
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </template>
+
+            <v-list-item>
+                <v-list-item-action>
+                  <v-icon>table_chart</v-icon>
+                </v-list-item-action>
+                <v-list-item-content>
+                    <v-list-item-title>
+                        Roles
+                    </v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
+
+             <v-list-item>
+                <v-list-item-action>
+                  <v-icon>table_chart</v-icon>
+                </v-list-item-action>
+                <v-list-item-content>
+                    <v-list-item-title>
+                        Usuarios
                     </v-list-item-title>
                 </v-list-item-content>
             </v-list-item>
           </v-list-group>
           </template> 
   
+  <template>
+          <v-list-group>
+            <template v-slot:activator>
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title>
+                    Consultas
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </template>
+
+            <v-list-item>
+                <v-list-item-action>
+                  <v-icon>table_chart</v-icon>
+                </v-list-item-action>
+                <v-list-item-content>
+                    <v-list-item-title>
+                        Consultas compras
+                    </v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
+
+             <v-list-item>
+                <v-list-item-action>
+                  <v-icon>table_chart</v-icon>
+                </v-list-item-action>
+                <v-list-item-content>
+                    <v-list-item-title>
+                        Consultas ventas
+                    </v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
+          </v-list-group>
+          </template> 
+
       </v-list>
     </v-navigation-drawer>
 
