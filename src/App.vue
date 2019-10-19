@@ -6,8 +6,8 @@
       app
     >
       <v-list dense>
+
         <template>
-          
           <v-list-item :to="{name:'home'}">
               <v-list-item-action>
                   <v-icon>home</v-icon>
@@ -16,7 +16,155 @@
               Inicio
               </v-list-item-title>
           </v-list-item>          
-          </template>
+         </template>
+
+        <template>
+          <v-list-group>
+            <template v-slot:activator>
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title>
+                    Categorías
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </template>
+
+            <v-list-item>
+                <v-list-item-action>
+                  <v-icon>table_chart</v-icon>
+                </v-list-item-action>
+                <v-list-item-content>
+                    <v-list-item-title>
+                        Menu 1
+                    </v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
+
+             <v-list-item>
+                <v-list-item-action>
+                  <v-icon>table_chart</v-icon>
+                </v-list-item-action>
+                <v-list-item-content>
+                    <v-list-item-title>
+                        Menu 2
+                    </v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
+          </v-list-group>
+          </template> 
+
+
+        <template>
+          <v-list-group>
+            <template v-slot:activator>
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title>
+                    Categorías
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </template>
+
+            <v-list-item>
+                <v-list-item-action>
+                  <v-icon>table_chart</v-icon>
+                </v-list-item-action>
+                <v-list-item-content>
+                    <v-list-item-title>
+                        Menu 1
+                    </v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
+
+             <v-list-item>
+                <v-list-item-action>
+                  <v-icon>table_chart</v-icon>
+                </v-list-item-action>
+                <v-list-item-content>
+                    <v-list-item-title>
+                        Menu 2
+                    </v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
+          </v-list-group>
+          </template> 
+
+          
+        <template>
+          <v-list-group>
+            <template v-slot:activator>
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title>
+                    Categorías
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </template>
+
+            <v-list-item>
+                <v-list-item-action>
+                  <v-icon>table_chart</v-icon>
+                </v-list-item-action>
+                <v-list-item-content>
+                    <v-list-item-title>
+                        Menu 1
+                    </v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
+
+             <v-list-item>
+                <v-list-item-action>
+                  <v-icon>table_chart</v-icon>
+                </v-list-item-action>
+                <v-list-item-content>
+                    <v-list-item-title>
+                        Menu 2
+                    </v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
+          </v-list-group>
+          </template> 
+
+          
+        <template>
+          <v-list-group>
+            <template v-slot:activator>
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title>
+                    Categorías
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </template>
+
+            <v-list-item>
+                <v-list-item-action>
+                  <v-icon>table_chart</v-icon>
+                </v-list-item-action>
+                <v-list-item-content>
+                    <v-list-item-title>
+                        Menu 1
+                    </v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
+
+             <v-list-item>
+                <v-list-item-action>
+                  <v-icon>table_chart</v-icon>
+                </v-list-item-action>
+                <v-list-item-content>
+                    <v-list-item-title>
+                        Menu 2
+                    </v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
+          </v-list-group>
+          </template> 
+  
       </v-list>
     </v-navigation-drawer>
 
