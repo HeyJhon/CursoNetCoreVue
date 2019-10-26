@@ -8,7 +8,7 @@
                     sort-by="nombre"
                     class="elevation-1"
                     >
-                <template v-slot:item.action="{ item }">
+                <template #item.opciones="{ item }">
                         <v-icon
                         small
                         class="mr-2"
@@ -16,14 +16,42 @@
                         >
                         edit
                         </v-icon>
-                        <v-icon
-                        small
-                        @click="deleteItem(item)"
-                        >
-                        delete
-                        </v-icon>
+                        <template v-if="item.condicion=='true'">
+                            <v-icon
+                            small
+                            @click="activarDesactivarMostrar(2,item)"
+                            >
+                            block
+                            </v-icon>
+
+                        </template>
+
+                          <template v-else>
+                            <v-icon
+                            small
+                            @click="activarDesactivarMostrar(1,item)"
+                            >
+                            check
+                            </v-icon>
+
+                        </template>
+
                     </template>
-                        <template v-slot:top>
+<template #items="props">
+    <td>  {{props.item.nombre}}</td> 
+    <td>  {{props.item.descripcion}}</td> 
+</template>
+
+<template #item.condicion="{item}">
+    <div v-if="item.condicion=='true'">
+        <span class="blue--text">Activo</span>
+    </div>
+     <div v-else>
+        <span class="red--text">Inactivo</span>
+    </div>
+</template>
+
+                        <template #top>
                             <v-toolbar flat color="white">
                             <v-toolbar-title>Categorias</v-toolbar-title>
                             <v-divider
@@ -48,10 +76,8 @@
                                         <v-text-field v-model="nombre" label="Nombre"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
-                                        <v-text-field v-model="descripcion" label="Descipcion"></v-text-field>
+                                        <v-text-field v-model="descripcion" label="Descripcion"></v-text-field>
                                         </v-col>
-
-
                                          <v-col cols="12" sm="6" md="4" v-show="valida">
                                        <div class="red--text" v-for="v in validaMensaje" :key="v" v-text="v">    </div>
                                         </v-col>
@@ -66,13 +92,47 @@
                                     <v-btn color="blue darken-1" text @click="guardar">Guardar</v-btn>
                                 </v-card-actions>
                                 </v-card>
+
+                            </v-dialog >
+
+                            <v-dialog v-model="adModal" max-width="290">
+                                    <v-card>
+                                            <v-card-title class="headline" v-if="adAccion==1">
+                                                    Activar Item?
+                                            </v-card-title>
+
+                                             <v-card-title class="headline" v-if="adAccion==2">
+                                                   Deactivar Item?
+                                            </v-card-title>
+
+                                            <v-card-text>
+                                                Estas a punto de 
+                                                <span  v-if="adAccion==1"> Activar</span>
+                                                <span  v-if="adAccion==2"> Desactivar</span>
+                                                el item {{adNombre}}
+                                            </v-card-text>
+
+                                            <v-card-actions>
+                                            <v-spacer></v-spacer>    
+                                              <v-btn color="green darken-1" text="text" v-if="adAccion==1"  @click="activar">
+                                                Activar
+                                            </v-btn>
+                                            <v-btn color="green darken-1" text="text" v-if="adAccion==2"  @click="desactivar">
+                                                Desactivar
+                                            </v-btn>
+                                            <v-btn color="orange darken-1" text="text" @click="activarDesactivarCerrar">
+                                                Cancelar
+                                            </v-btn>
+                                            </v-card-actions>    
+                                    </v-card>
                             </v-dialog>
+
                             </v-toolbar>
                         </template>
 
                
-                <template v-slot:no-data>
-                        <v-btn color="primary" @click="initialize">Reset</v-btn>
+                <template #no-data>
+                        <v-btn color="primary" @click="listar">Resetear</v-btn>
                 </template>
             </v-data-table>
        </v-flex>
@@ -96,18 +156,16 @@ export default {
                    
                     editedIndex: -1,
 
-                    editedItem: {
-                        name: '',
-                        calories: 0,
-                        fat: 0,
-                        carbs: 0,
-                        protein: 0,
-                    },
                     id:'',
                     nombre:'',
                     descripcion:'',
                     valida:0,
-                    validaMensaje:[]
+                    validaMensaje:[],
+
+                    adModal:0,
+                    adAccion:0,
+                    adNombre:'',
+                    adId:''
                     
         }
     },
@@ -141,9 +199,12 @@ console.log(error);
        
 
                 editItem (item) {
-                this.editedIndex = this.desserts.indexOf(item)
-                this.editedItem = Object.assign({}, item)
-                this.dialog = true
+                    this.id= item.idcategoria;
+                    this.nombre=item.nombre;
+                    this.descripcion = item.descripcion;
+                    this.editedIndex = 1;
+
+                    this.dialog = true
                 },
 
                 deleteItem (item) {
@@ -152,14 +213,15 @@ console.log(error);
                 },
 
                 close () {
-                this.dialog = false
-                
+                this.dialog = false;
+this.limpiar();                
                 },
 
                 limpiar(){
                 this.id="";
                 this.nombre = "";
                 this.descripcion="";
+                this.editedIndex=-1;
                 },
 
                 guardar () {
@@ -168,6 +230,22 @@ console.log(error);
                     }  
                     if (this.editedIndex > -1) {
                         //Codigo para editar
+                            let me = this;
+                            axios.put('api/Categorias/Actualizar',
+                            {
+                                'idcategoria':me.id,
+                                'nombre':me.nombre,
+                                 'descripcion':me.descripcion
+                            }
+                                ).then(function(response){
+                                me.close();
+                                me.listar();
+                                me.limpiar();
+                            
+                            }).catch(function(error){
+                                console.log(error);
+                            });
+
                     } else {
                         //Codigo para guardar
                         let me = this;
@@ -192,6 +270,58 @@ console.log(error);
                         this.valida = 1;
                     }  
                     return this.valida;
+                },
+
+                activarDesactivarMostrar(accion,item){
+                    this.adModal= 1;
+                    this.adNombre = item.nombre;
+                    this.adId = item.idcategoria;
+                                            if(accion==1)
+                                            {
+                    this.adAccion = 1;
+                    }
+                                            else if(accion==2){
+
+                    this.adAccion = 2
+                                            }
+                                            else{
+                                                this.adModal = 0;
+                                            }
+                },
+
+                activar(){
+                       let me = this;
+                            axios.put('api/Categorias/Activar/'+this.adId
+                                ).then(function(response){
+                               me.adModal = 0;
+                               me.adAccion = 0;
+                               me.adNombre = '';
+                               me.adId = '';
+                               me.listar();
+
+                            
+                            }).catch(function(error){
+                                console.log(error);
+                            });
+                },
+                desactivar(){
+                        let me = this;
+                            axios.put('api/Categorias/Desactivar/'+this.adId
+                                ).then(function(response){
+                               me.adModal = 0;
+                               me.adAccion = 0;
+                               me.adNombre = '';
+                               me.adId = '';
+                               me.listar();
+
+                            
+                            }).catch(function(error){
+                                console.log(error);
+                            });
+                },
+
+                activarDesactivarCerrar(){
+                    this.adModal = 0;
                 }
     }
 }
